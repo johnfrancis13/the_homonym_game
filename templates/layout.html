@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Welcome{% endblock %} | {{ g.globalTitle }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="static/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.css">
+    <style>
+      body {
+        padding-top: 60px; 
+      }
+    </style>
+    <link href="static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+     <style>
+      .table-nonfluid {
+         width: auto;
+      }
+    </style>
+  </head>
+  
+  <body>
+    
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/">{{ g.globalTitle }}</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <!-- <li class="active"><a href="#"></a></li> -->
+            {% for page in g.usedPages %}
+              <li><a href="{{ url_for(page) }}">{{ page }}</a></li>
+            {% endfor %}
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="game_setup">Game Setup</a></li>
+            <li><a href="leaderboard">Leaderboard</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    {% include 'flash.html' %}
+    <script src="static/jquery/jquery.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+
+    <div class="container">
+      {% block body %}{% endblock %}
+      
+      {% block scripts %}
+      <script>
+      $(document).ready(function () {
+        $('#data').DataTable();
+      });
+      </script>
+      {% endblock %}
+      <hr>
+      <footer>
+        <p>The Homonym Game &mdash; A JGFF  Application</p>
+      </footer>
+    </div>
+  </body>
+</html>  

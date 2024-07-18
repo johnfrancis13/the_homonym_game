@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+<head>
+    <meta charset="UTF-8">
+    <title>Enter Player Names</title>
+</head>
+<body>
+    <h1>Enter Player Names</h1>
+    <form action="{{ url_for('initialize_players') }}" method="POST">
+        {% for i in range(1, num_players + 1) %}
+            <label for="player{{ i }}">Player {{ i }}:</label>
+            <input type="text" id="player{{ i }}" name="player{{ i }}" required><br>
+        {% endfor %}
+        <button type="submit">Start Game</button>
+    </form>
+</body>
+{% endblock %}

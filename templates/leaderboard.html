@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+  <h2>Leaderboard</h2>
+
+  <p>Top performers on The Homonym Game, by total wins and highest score.</p>
+  <p>Note: The number of rounds may have differed by game.</p>
+
+  <table  id="data" class="table table-striped">
+    <thead class="thead-inverse">
+      <tr>
+          <th>Total Wins</th>
+          <th>Player</th>
+          <th>High Score</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for entry in leaderboard %}
+    <tr>
+      <th scope="row">{{ entry.total_wins }}</th>
+      <td>{{ entry.player }}</td>
+      <td>{{ entry.high_score}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table> 
+  <a href="{{ url_for('game_setup') }}">Start a new game</a>
+
+{% endblock %}

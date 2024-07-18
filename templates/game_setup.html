@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+  <div class=uploadform>
+    <h3>Game Setup</h3>
+    <form action="{{ url_for('setup_players') }}" method="POST">
+      <p>
+        <label for="num_of_players">Number of players: (1-20):</label>
+        <input type="number" min="1" max="20" name="num_of_players" id="num_of_players">
+      </p>
+      <p>
+        <label for="num_rounds">Number of Rounds:</label>
+        <input type="number" id="num_rounds" name="num_rounds" min="1" required>
+      </p>
+      <input type="submit" value="Start Game">
+    </form>
+  </div>
+
+
+<script>
+
+    function getFormValues(formId) {
+      const form = document.getElementById(formId);
+      const formData = new FormData(form);
+      const mappingMethod = 'start the game';
+
+    async function start_the_game(data) {
+      try {
+        const response = await fetch("/play_the_game", {
+          method: "POST",
+          body: data
+        });
+        // Check if the response is OK
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        // console.log("User Mapping Await");
+        const result = await response.json();
+        if (result.status === 'success') {
+          const width = 600;
+          const height = 400;
+          const top = (window.innerHeight - height) / 2 + window.screenY;
+          const left = (window.innerWidth - width) / 2 + window.screenX;
+          // Save the variables to be used in the new window
+          const num_of_players = encodeURIComponent(result.num_of_players);
+          console.log("Opening new window");
+          window.open(`/mapping?path=${num_of_players}`, 'MappingWindow', `width=${width},height=${height},top=${top},left=${left}`);
+        }
+      } catch (error) {
+        console.error("User Mapping Error:", error);
+      }
+    }
+
+  </script>
+{% endblock %}

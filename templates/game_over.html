@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+<head>
+    <meta charset="UTF-8">
+    <title>Game Over</title>
+</head>
+<body>
+    <h1>Game Over</h1>
+    <h2>Final Scores</h2>
+    <ul>
+        {% for player, score in player_scores.items() %}
+            <li>{{ player }}: {{ score }} points</li>
+        {% endfor %}
+    </ul>
+    <h2>Winner(s)</h2>
+    <ul>
+        {% for winner in winners %}
+            <li>{{ winner }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('game_setup') }}">Start a New Game</a>
+    <a href="{{ url_for('leaderboard') }}">View Leaderboard</a>
+</body>
+{% endblock %}

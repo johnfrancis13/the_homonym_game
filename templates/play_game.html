@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+    {% if player_scores %}
+      <h2>Current Scores</h2>
+      <ul>
+          {% for player, score in player_scores.items() %}
+              <li>{{ player }}: {{ score }} points</li>
+          {% endfor %}
+      </ul>
+    {% endif %}
+
+<head>
+    <meta charset="UTF-8">
+    <h2>Round {{ current_round }} of {{ num_rounds }}</h2>
+    <h3>Player's Turn: {{ current_player }}</h3>
+    <title>Question</title>
+</head>
+<body>
+    <h2>Your homonym is: {{ selected_word }}  ({{ pronunciation }} )</h2>
+ <!--    <h4>{{ selected_word }} is prounounced {{ pronunciation }} and has the following parts of speech listed: {{ parts_of_speech }}</h4>
+   <h4>The listed etymology of {{ selected_word }} is: {{ etymology }}</h4> -->
+    <h3>The available definitions for {{ selected_word }} are:</h3>
+   <!-- {% for para in definitions %}
+     <p>{{para}}</p>
+    {% endfor %}-->
+    <h3>{{definitions}}</h3>
+    <form action="{{ url_for('submit_answer') }}" method="POST">
+        <label for="player">Who gave the best answer?</label>
+        <select id="player" name="player" required>
+            {% for player in players %}
+                {% if player != current_player %}
+                    <option value="{{ player }}">{{ player }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <button type="submit">Assign Point</button>
+    </form>
+    <form action="{{ url_for('generate_new_homonym') }}" method="POST">
+        <label for="player">This homonym not to your liking?</label>
+        <button type="submit">Generate a new homonym</button>
+    </form>
+</body>
+{% endblock %}
