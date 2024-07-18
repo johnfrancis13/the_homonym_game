@@ -1,4 +1,4 @@
-## About
+## The Homonym Game
 The Homonym Game is a social-linguistic game based around the etymologies of [homonyms](https://en.wikipedia.org/wiki/Homonym). For the purpose of this game, homonyms are words that have multiple defintions. But why might the spelling of a word have two or more definitons you ask? That is up for YOU, the players, to convince your friends (or simply the 'other players') of. In the tradition of games like Apples to Apples or Cards Against Humanity, players take turns judging the quality, hilarity, sophistication, and cleverness of the other players answers. The most hilarious, clever, and sophisticated player at the end of the game (as determined by points) wins! 
 
 #### Homonym Example
